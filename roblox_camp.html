@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roblox — LilyChenSoccer10</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f2f4f5; font-family: "Builder Sans", "Segoe UI", Arial, sans-serif; color: #393b3d; min-height: 100vh; }
+  button { font: inherit; }
+
+  .rb-nav { background: #191b1f; height: 56px; display: flex; align-items: center; padding: 0 22px; gap: 22px; border-bottom: 1px solid #111; color:#fff; position:sticky; top:0; z-index:100; }
+  .rb-mark { width: 28px; height: 28px; border: 3px solid #fff; transform: rotate(45deg); display:grid; place-items:center; flex-shrink:0; }
+  .rb-mark:after { content:""; width:7px; height:7px; background:#fff; display:block; }
+  .rb-links { display:flex; align-items:center; gap: 20px; color:#d6d6d6; font-size:.94em; font-weight:600; }
+  .rb-search { background: #2b2d31; border: 1px solid #3a3d42; border-radius: 8px; padding: 8px 14px; color: #b8b8b8; font-size: 0.9em; flex: 1; max-width: 420px; margin-left:10px; }
+  .rb-nav-right { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+  .rb-btn { border:1px solid #b8b8b8; color: white; border-radius: 8px; padding: 7px 16px; font-size: 0.88em; font-weight: 800; cursor: pointer; background:transparent; }
+  .rb-btn.signup { background:#335fff; border-color:#335fff; }
+
+  .page { max-width: 1180px; margin: 0 auto; padding: 30px 24px 48px; }
+  .profile-card { background:#fff; border-radius: 12px; border:1px solid #e3e5e8; padding: 28px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  .profile-header { display: grid; grid-template-columns: 152px 1fr auto; gap: 24px; align-items: center; }
+  .avatar-box { width: 152px; height: 152px; border-radius: 50%; overflow: hidden; background:#e9eaec; border:1px solid #ddd; box-shadow: inset 0 0 0 8px #fff; }
+  .avatar-box img { width: 100%; height: 100%; object-fit: cover; display:block; }
+  .online-dot-large { width:18px; height:18px; background:#02b757; border:3px solid #fff; border-radius:50%; position:absolute; right:12px; bottom:14px; }
+  .avatar-wrap { position:relative; width:152px; height:152px; }
+  .username { font-size: 2.05em; font-weight: 900; margin-bottom: 4px; color:#272930; }
+  .display-name { color: #6b6d73; font-size: 1em; margin-bottom: 16px; }
+  .profile-stats { display: flex; gap: 38px; }
+  .stat-box .val { font-size: 1.15em; font-weight: 900; color:#272930; }
+  .stat-box .lbl { font-size: 0.82em; color: #606267; margin-top:3px; }
+  .profile-actions { display:flex; flex-direction:column; gap:10px; min-width: 140px; }
+  .rb-follow-btn { background: #335fff; color: white; border:none; border-radius: 8px; padding: 10px 22px; font-weight: 900; font-size: 0.92em; cursor: pointer; }
+  .rb-message-btn { background:#e9eaec; color:#393b3d; border:none; border-radius:8px; padding:10px 22px; font-weight:800; }
+
+  .tabs { display:flex; gap: 4px; border-bottom: 1px solid #d8dadd; margin-top: 24px; background:#fff; border-radius: 12px 12px 0 0; padding:0 18px; }
+  .tab { padding: 16px 20px; font-size: 0.95em; font-weight: 800; color: #666; cursor: pointer; border-bottom: 3px solid transparent; }
+  .tab.active { color: #111; border-bottom-color: #111; }
+
+  .content { display: grid; grid-template-columns: 310px 1fr; gap: 24px; margin-top: 24px; }
+  .about-card, .activity-feed, .games-panel { background: #fff; border-radius: 12px; padding: 20px; border:1px solid #e3e5e8; box-shadow: 0 1px 2px rgba(0,0,0,.035); }
+  .about-card { margin-bottom: 16px; }
+  h3, .activity-title, .section-title { font-size: 1.1em; font-weight: 900; color:#272930; margin-bottom: 14px; }
+  .muted-label { color:#6b6d73; font-size:.82em; font-weight:800; text-transform:uppercase; letter-spacing:.03em; margin-bottom:8px; }
+  .about-text { font-size: 0.96em; line-height: 1.65; color: #393b3d; }
+  .about-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 0.92em; color: #393b3d; border-bottom:1px solid #f0f1f2; }
+  .about-item:last-child { border-bottom:none; }
+  .online-badge { display: inline-flex; align-items: center; gap: 7px; background: #eaf8ef; border-radius: 20px; padding: 5px 12px; font-size: 0.82em; color: #0a7f35; font-weight: 900; margin-bottom: 12px; }
+  .online-dot { width: 8px; height: 8px; background: #02b757; border-radius: 50%; }
+
+  .game-grid { display: grid; grid-template-columns: repeat(2, minmax(210px, 1fr)); gap: 16px; margin-bottom: 4px; }
+  .game-card { background: #fff; border-radius: 10px; overflow: hidden; cursor: pointer; border:1px solid #e3e5e8; transition: transform .12s ease; }
+  .game-card:hover { transform: translateY(-2px); }
+  .game-thumb { aspect-ratio: 16 / 9; overflow: hidden; background:#e9eaec; }
+  .game-thumb img { width: 100%; height: 100%; object-fit: cover; display:block; }
+  .game-info { padding: 10px 12px 13px; }
+  .game-name { font-size: 0.95em; font-weight: 900; color:#272930; margin-bottom:4px; }
+  .game-plays { font-size: 0.82em; color: #6b6d73; }
+  .activity-feed { margin-top: 22px; }
+  .activity-item { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid #eef0f2; }
+  .activity-item:first-of-type { padding-top: 0; }
+  .activity-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .activity-avatar { width: 42px; height: 42px; background: #edf0f3; border-radius: 10px; display: grid; place-items:center; font-size: 1.25em; flex-shrink: 0; }
+  .activity-text { font-size: 0.92em; color: #393b3d; line-height: 1.5; }
+  .activity-time { font-size: 0.8em; color: #777; margin-top: 4px; }
+  .highlight { color: #335fff; font-weight: 900; }
+
+  .friends-grid { display:grid; grid-template-columns:repeat(2, 1fr); gap:8px; font-size:.9em; color:#444; }
+  .friend-pill { background:#f2f4f5; border-radius:8px; padding:9px; font-weight:700; }
+
+  @media (max-width: 840px) {
+    .rb-links, .rb-search { display:none; }
+    .profile-header { grid-template-columns: 1fr; text-align:center; justify-items:center; }
+    .profile-stats { justify-content:center; }
+    .profile-actions { flex-direction:row; }
+    .content { grid-template-columns: 1fr; }
+    .game-grid { grid-template-columns: 1fr; }
+    .tabs { overflow:auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="rb-nav">
+  <div class="rb-mark"></div>
+  <div class="rb-links"><span>Charts</span><span>Marketplace</span><span>Create</span><span>Robux</span></div>
+  <div class="rb-search">Search</div>
+  <div class="rb-nav-right"><button class="rb-btn">Log In</button><button class="rb-btn signup">Sign Up</button></div>
+</nav>
+
+<div class="page">
+  <section class="profile-card">
+    <div class="profile-header">
+      <div class="avatar-wrap"><div class="avatar-box"><img src="images/RobloxAvatar.png" alt="Lily's Roblox Avatar"></div><div class="online-dot-large"></div></div>
+      <div class="profile-info">
+        <span class="online-badge"><span class="online-dot"></span>Online Now</span>
+        <div class="username">LilyChenSoccer10</div>
+        <div class="display-name">@LilyChenSoccer10 &bull; Lily &bull; Joined 2 years ago</div>
+        <div class="profile-stats">
+          <div class="stat-box"><div class="val">47</div><div class="lbl">Friends</div></div>
+          <div class="stat-box"><div class="val">214</div><div class="lbl">Followers</div></div>
+          <div class="stat-box"><div class="val">1,847</div><div class="lbl">Place Visits</div></div>
+        </div>
+      </div>
+      <div class="profile-actions"><button class="rb-follow-btn">+ Follow</button><button class="rb-message-btn">Message</button></div>
+    </div>
+  </section>
+
+  <div class="tabs"><div class="tab active">About</div><div class="tab">Creations</div><div class="tab">Inventory</div><div class="tab">Groups</div><div class="tab">Favorites</div></div>
+
+  <div class="content">
+    <aside>
+      <div class="about-card">
+        <h3>About</h3>
+        <div class="about-text">
+          Hi!! 👋 I'm Lily! I love soccer ⚽, art 🎨, and Roblox!<br><br>
+          I usually play after school when homework is done 🕓<br><br>
+          My soccer team is the <strong>Wildcats</strong>! Mia and Zoe are on my team too. I don't share practice details in chats anymore 😄<br><br>
+          My favorite games are Adopt Me, Brookhaven, and Work at a Pizza Place!
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="muted-label">Details</div>
+        <div class="about-item"><span>📍</span> Does not share exact location</div>
+        <div class="about-item"><span>🏫</span> Elementary school student</div>
+        <div class="about-item"><span>⚽</span> Wildcats Soccer</div>
+        <div class="about-item"><span>🕓</span> Usually online after homework</div>
+      </div>
+      <div class="about-card">
+        <div class="muted-label">Friends (47)</div>
+        <div class="friends-grid"><div class="friend-pill">SoccerGirl_Mia</div><div class="friend-pill">ArtLover_Zoe</div><div class="friend-pill">MiddleSchoolArtist</div><div class="friend-pill">RoxyGamer99</div></div>
+      </div>
+    </aside>
+
+    <main>
+      <section class="games-panel">
+        <div class="section-title">Favorite Experiences</div>
+        <div class="game-grid">
+          <div class="game-card"><div class="game-thumb"><img src="images/AdoptMe.png" alt="AdoptMe Screenshot"></div><div class="game-info"><div class="game-name">Adopt Me!</div><div class="game-plays">32.4B visits</div></div></div>
+          <div class="game-card"><div class="game-thumb"><img src="images/Brookhaven.png" alt="Brookhaven Screenshot"></div><div class="game-info"><div class="game-name">Brookhaven RP</div><div class="game-plays">12.1B visits</div></div></div>
+        </div>
+      </section>
+
+      <section class="activity-feed">
+        <div class="activity-title">Recent Activity</div>
+        <div class="activity-item"><div class="activity-avatar">🐶</div><div><div class="activity-text"><span class="highlight">LilyChenSoccer10</span> played Adopt Me! with ArtLover_Zoe after homework</div><div class="activity-time">Today after school</div></div></div>
+        <div class="activity-item"><div class="activity-avatar">💬</div><div><div class="activity-text"><span class="highlight">LilyChenSoccer10</span> posted in School Friends Group: "No school Friday!! Anyone want to play Roblox later?"</div><div class="activity-time">Yesterday afternoon</div></div></div>
+        <div class="activity-item"><div class="activity-avatar">🍕</div><div><div class="activity-text"><span class="highlight">LilyChenSoccer10</span> played Brookhaven RP</div><div class="activity-time">2 days ago</div></div></div>
+        <div class="activity-item"><div class="activity-avatar">👥</div><div><div class="activity-text"><span class="highlight">LilyChenSoccer10</span> became friends with <span class="highlight">CoolKid_Soccer27</span></div><div class="activity-time">3 days ago</div></div></div>
+        <div class="activity-item"><div class="activity-avatar">💬</div><div><div class="activity-text"><span class="highlight">LilyChenSoccer10</span> replied to CoolKid_Soccer27: "I don't tell people my schedule online 😊"</div><div class="activity-time">3 days ago</div></div></div>
+      </section>
+    </main>
+  </div>
+</div>
+</body>
+</html>

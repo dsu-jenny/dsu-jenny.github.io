@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram (@carter_family_moments)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #fafafa; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #262626; }
+
+  .ig-nav { background: #fff; border-bottom: 1px solid #dbdbdb; height: 60px; display: flex; align-items: center; justify-content: center; position: sticky; top: 0; z-index: 100; }
+  .nav-inner { width: 100%; max-width: 975px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
+  .ig-nav .logo { font-size: 1.65em; font-family: 'Brush Script MT', 'Segoe Script', cursive; font-weight: 600; letter-spacing: .2px; }
+  .search-box { width: 250px; background: #efefef; color: #8e8e8e; border-radius: 8px; padding: 8px 14px; font-size: 0.9em; text-align: left; }
+  .nav-icons { display: flex; align-items: center; gap: 18px; font-size: 1.35em; }
+  .nav-icon { line-height: 1; }
+  .mini-avatar { width: 26px; height: 26px; border-radius: 50%; overflow: hidden; border: 1px solid #dbdbdb; }
+  .mini-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .profile-wrap { max-width: 935px; margin: 0 auto; padding: 34px 20px 24px; }
+  .profile-header { display: grid; grid-template-columns: 170px 1fr; gap: 36px; align-items: center; margin-bottom: 22px; }
+  .avatar { width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); padding: 4px; }
+  .avatar-inner { width: 100%; height: 100%; border-radius: 50%; background: #fff; border: 4px solid #fff; overflow: hidden; }
+  .avatar-inner img, .post-avatar-inner img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
+  .profile-info { flex: 1; }
+  .username-row { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; flex-wrap: wrap; }
+  .username { font-size: 1.55em; font-weight: 400; }
+  .follow-btn { background: #0095f6; color: white; border: none; padding: 7px 18px; border-radius: 8px; font-weight: 700; font-size: 0.88em; cursor: pointer; }
+  .message-btn { background: #efefef; color: #262626; border: none; padding: 7px 16px; border-radius: 8px; font-weight: 700; font-size: 0.88em; cursor: pointer; }
+  .settings-dot { font-size: 1.25em; color: #262626; }
+  .stats { display: flex; gap: 34px; margin-bottom: 14px; }
+  .stat span { font-weight: 700; }
+  .stat { font-size: 0.96em; }
+  .fullname { font-weight: 700; font-size: 0.95em; margin-bottom: 4px; }
+  .bio { font-size: 0.93em; line-height: 1.6; max-width: 460px; }
+
+  .highlights { display: flex; gap: 28px; max-width: 935px; margin: 0 auto 26px; padding: 0 20px; }
+  .highlight { text-align: center; font-size: 0.78em; color: #262626; font-weight: 600; }
+  .highlight-circle { width: 76px; height: 76px; border-radius: 50%; background: #fff; border: 1px solid #dbdbdb; display: flex; align-items: center; justify-content: center; font-size: 1.7em; margin-bottom: 7px; }
+
+  .posts-divider { border: none; border-top: 1px solid #dbdbdb; max-width: 935px; margin: 0 auto; }
+  .posts-tab { max-width: 935px; margin: 0 auto 20px; display: flex; justify-content: center; }
+  .posts-tab span { border-top: 2px solid #262626; padding-top: 12px; margin-top: -1px; font-size: 0.78em; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .feed { max-width: 470px; margin: 0 auto; padding: 0 16px 40px; }
+  .post { background: #fff; border: 1px solid #dbdbdb; border-radius: 8px; margin-bottom: 24px; overflow: hidden; }
+  .post-header { display: flex; align-items: center; gap: 10px; padding: 12px 14px; }
+  .post-avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); padding: 2px; }
+  .post-avatar-inner { width: 100%; height: 100%; border-radius: 50%; background: #fff; overflow: hidden; border: 2px solid #fff; }
+  .post-header-info { flex: 1; }
+  .post-username { font-weight: 700; font-size: 0.88em; }
+  .post-location { font-size: 0.78em; color: #262626; cursor: pointer; margin-top: 2px; }
+  .more { font-size: 1.3em; letter-spacing: 1px; }
+  .post-image { width: 100%; aspect-ratio: 1 / 1; background: #efefef; overflow: hidden; }
+  .post-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .post-actions { display: flex; align-items: center; gap: 14px; padding: 10px 14px 6px; font-size: 1.45em; }
+  .save { margin-left: auto; }
+  .post-likes { padding: 0 14px 6px; font-size: 0.88em; font-weight: 700; }
+  .post-caption { padding: 0 14px 6px; font-size: 0.88em; line-height: 1.5; }
+  .post-caption .cap-username { font-weight: 700; }
+  .post-comment { padding: 0 14px 4px; font-size: 0.82em; color: #8e8e8e; }
+  .post-comment .cap-user { font-weight: 700; color: #262626; }
+  .post-time { padding: 4px 14px 12px; font-size: 0.72em; color: #8e8e8e; text-transform: uppercase; }
+  .tag { color: #00376b; }
+
+  @media (max-width: 700px) {
+    .search-box { display: none; }
+    .profile-header { grid-template-columns: 92px 1fr; gap: 18px; }
+    .avatar { width: 86px; height: 86px; }
+    .stats { gap: 16px; font-size: .9em; }
+    .username { font-size: 1.25em; }
+    .highlights { gap: 16px; overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="ig-nav">
+  <div class="nav-inner">
+    <div class="logo">Instagram</div>
+    <div class="search-box">Search</div>
+    <div class="nav-icons">
+      <span class="nav-icon">⌂</span>
+      <span class="nav-icon">♡</span>
+      <span class="nav-icon">⊕</span>
+      <span class="mini-avatar"><img src="images/MomAvatar.png" alt="Sarah Carter"></span>
+    </div>
+  </div>
+</nav>
+
+<div class="profile-wrap">
+  <div class="profile-header">
+    <div class="avatar"><div class="avatar-inner"><img src="images/MomAvatar.png" alt="Sarah Carter"></div></div>
+    <div class="profile-info">
+      <div class="username-row">
+        <div class="username">carter_family_moments</div>
+        <button class="follow-btn">Follow</button>
+        <button class="message-btn">Message</button>
+        <span class="settings-dot">•••</span>
+      </div>
+      <div class="stats">
+        <div class="stat"><span>84</span> posts</div>
+        <div class="stat"><span>412</span> followers</div>
+        <div class="stat"><span>298</span> following</div>
+      </div>
+      <div class="fullname">Sarah Carter 🌸</div>
+      <div class="bio">Mom life 💕 | Elementary school mom 💕 | Soccer weekends ⚽ | Art projects + family moments 🏡</div>
+    </div>
+  </div>
+</div>
+<div class="highlights">
+  <div class="highlight"><div class="highlight-circle">🏡</div><div>Home</div></div>
+  <div class="highlight"><div class="highlight-circle">⚽</div><div>Soccer</div></div>
+  <div class="highlight"><div class="highlight-circle">🎒</div><div>School</div></div>
+  <div class="highlight"><div class="highlight-circle">🎂</div><div>Birthday</div></div>
+</div>
+
+<hr class="posts-divider">
+<div class="posts-tab"><span>⊞ Posts</span></div>
+
+<div class="feed">
+
+  <!-- Post 1: Home alone -->
+  <div class="post">
+    <div class="post-header">
+      <div class="post-avatar"><div class="post-avatar-inner"><img src="images/MomAvatar.png" alt="Sarah Carter"></div></div>
+      <div class="post-header-info">
+        <div class="post-username">carter_family_moments</div>
+      </div>
+      <div class="more">•••</div>
+    </div>
+    <div class="post-image">
+      <img src="images/Insta1.png" alt="Lily after school">
+    </div>
+    <div class="post-actions"><span>♡</span><span>💬</span><span>↗</span><span class="save">▱</span></div>
+    <div class="post-likes">38 likes</div>
+    <div class="post-caption"><span class="cap-username">carter_family_moments</span> She's getting so independent! 🥹 After-school independence looks good on her while I'm still at work. Snack, homework, then a little screen time while we finish up work. Rockets practice days always make her extra hungry! #GrowingUp #ProudMom #AfterSchool</div>
+    <div class="post-comment"><span class="cap-user">aunt_jenny_c</span> Look at her!! So big! 💕</div>
+    <div class="post-time">2 days ago</div>
+  </div>
+
+  <!-- Post 2: Soccer practice schedule -->
+  <div class="post">
+    <div class="post-header">
+      <div class="post-avatar"><div class="post-avatar-inner"><img src="images/MomAvatar.png" alt="Sarah Carter"></div></div>
+      <div class="post-header-info">
+        <div class="post-username">carter_family_moments</div>
+        <div class="post-location">📍 Sunset Park</div>
+      </div>
+      <div class="more">•••</div>
+    </div>
+    <div class="post-image">
+      <img src="images/Insta2.png" alt="Lily at soccer practice">
+    </div>
+    <div class="post-actions"><span>♡</span><span>💬</span><span>↗</span><span class="save">▱</span></div>
+    <div class="post-likes">74 likes</div>
+    <div class="post-caption"><span class="cap-username">carter_family_moments</span> So proud of my soccer star!! 🎉⚽ Another great Rockets practice after school! Lily scored her first goal this week, and Mia and Zoe were cracking her up the whole time. <span class="tag">#RocketsSoccer #SoccerMom #ProudMom</span></div>
+    <div class="post-comment"><span class="cap-user">soccermom_Katie</span> Go Lily!! Mia and Zoe said she was amazing today. Rockets girls are having such a good season! 🎉</div>
+    <div class="post-time">1 week ago</div>
+  </div>
+
+  <!-- Post 3: First day of school -->
+  <div class="post">
+    <div class="post-header">
+      <div class="post-avatar"><div class="post-avatar-inner"><img src="images/MomAvatar.png" alt="Sarah Carter"></div></div>
+      <div class="post-header-info">
+        <div class="post-username">carter_family_moments</div>
+        <div class="post-location">📍 Oak Park Elementary</div>
+      </div>
+      <div class="more">•••</div>
+    </div>
+    <div class="post-image">
+      <img src="images/Insta3.png" alt="Lily's first day of 4th">
+    </div>
+    <div class="post-actions"><span>♡</span><span>💬</span><span>↗</span><span class="save">▱</span></div>
+    <div class="post-likes">112 likes</div>
+    <div class="post-caption"><span class="cap-username">carter_family_moments</span> First day of 4th grade at Oak Park Elementary!! 😭🎒 Can't believe how fast she's growing. The morning walk is officially her favorite part of elementary school so far. <span class="tag">#OakPark #BackToSchool #Grade4</span></div>
+    <div class="post-time">2 months ago</div>
+  </div>
+
+  <!-- Post 4: Birthday -->
+  <div class="post">
+    <div class="post-header">
+      <div class="post-avatar"><div class="post-avatar-inner"><img src="images/MomAvatar.png" alt="Sarah Carter"></div></div>
+      <div class="post-header-info">
+        <div class="post-username">carter_family_moments</div>
+      </div>
+      <div class="more">•••</div>
+    </div>
+    <div class="post-image">
+      <img src="images/Insta4.png" alt="Lily's birthday">
+    </div>
+    <div class="post-actions"><span>♡</span><span>💬</span><span>↗</span><span class="save">▱</span></div>
+    <div class="post-likes">143 likes</div>
+    <div class="post-caption"><span class="cap-username">carter_family_moments</span> Happy birthday to our Lily!! 🎂🎉 Hard to believe she is officially a 4th grader. We love you so much sweetheart!! <span class="tag">#HappyBirthday #FamilyMoment</span></div>
+    <div class="post-time">3 months ago</div>
+  </div>
+
+</div>
+</body>
+</html>

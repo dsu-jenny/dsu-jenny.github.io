@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Safety Detective — Case File: Lily</title>
+<style>
+  :root{
+    --ink:#0f172a; --muted:#64748b; --line:#dbe3ef; --card:#ffffff;
+    --blue:#2563eb; --purple:#7c3aed; --green:#16a34a; --amber:#f59e0b;
+    --bg1:#eef6ff; --bg2:#f8f5ff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Arial, sans-serif;color:var(--ink);min-height:100vh;background:
+    radial-gradient(circle at 12% 12%, rgba(37,99,235,.25), transparent 30%),
+    radial-gradient(circle at 85% 8%, rgba(124,58,237,.22), transparent 28%),
+    linear-gradient(135deg,var(--bg1),var(--bg2));padding:32px 18px;}
+  .shell{max-width:1080px;margin:0 auto}.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;color:#334155}.brand{display:flex;align-items:center;gap:12px;font-weight:900}.brand-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--purple));display:grid;place-items:center;color:#fff;box-shadow:0 10px 25px rgba(37,99,235,.28)}.pill{border:1px solid rgba(15,23,42,.08);background:rgba(255,255,255,.75);padding:8px 14px;border-radius:999px;font-size:.84rem;font-weight:700;color:#475569;backdrop-filter:blur(10px)}
+  .hero{background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.75);box-shadow:0 24px 70px rgba(15,23,42,.16);border-radius:28px;overflow:hidden}.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;min-height:560px}.hero-main{padding:46px}.eyebrow{display:inline-flex;gap:8px;align-items:center;background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;border-radius:999px;padding:7px 12px;font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:18px}.hero h1{font-size:clamp(2.25rem,5vw,4.3rem);line-height:.96;letter-spacing:-.06em;margin-bottom:18px}.hero h1 span{background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}.lead{font-size:1.08rem;line-height:1.75;color:#475569;max-width:610px;margin-bottom:24px}.mission{background:#fffbeb;border:1px solid #fde68a;border-left:6px solid var(--amber);border-radius:18px;padding:18px 20px;color:#713f12;line-height:1.7;margin-bottom:22px}.mission strong{color:#92400e}.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}.nav-btn{display:flex;align-items:center;gap:12px;text-decoration:none;color:#0f172a;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 10px 30px rgba(15,23,42,.06);transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}.nav-btn:hover{transform:translateY(-2px);box-shadow:0 18px 36px rgba(15,23,42,.12);border-color:#bfdbfe}.nav-btn .icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#eff6ff,#f5f3ff);font-size:1.35rem}.nav-btn strong{display:block;font-size:.94rem}.nav-btn small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}.side{background:linear-gradient(160deg,#172554,#312e81 55%,#4c1d95);padding:34px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}.side:before{content:"";position:absolute;inset:-80px -120px auto auto;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.12)}.case-card{position:relative;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:24px;padding:24px;backdrop-filter:blur(14px)}.case-photo{width:86px;height:86px;border-radius:26px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:2.4rem;margin-bottom:18px}.case-card h2{font-size:1.35rem;margin-bottom:8px}.case-card p{color:#dbeafe;line-height:1.7;font-size:.95rem}.checklist{position:relative;margin-top:24px}.checklist h3{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:#bfdbfe;margin-bottom:12px}.q{display:flex;gap:10px;align-items:flex-start;margin:10px 0;color:#f8fafc;font-size:.92rem}.q-num{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.2);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:.78rem;font-weight:900;flex:0 0 auto}.remember{position:relative;margin-top:24px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:16px;color:#ede9fe;line-height:1.6;font-size:.9rem}.footer{text-align:center;color:#64748b;font-size:.82rem;margin-top:18px}@media(max-width:850px){.hero-grid{grid-template-columns:1fr}.side{min-height:520px}.actions{grid-template-columns:1fr}.topbar{flex-direction:column;gap:12px}.hero-main{padding:30px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="topbar"><div class="brand"><div class="brand-mark">🔍</div><div>Digital Safety Detective</div></div><div class="pill">Case File #003 • Educational Use</div></div>
+  <main class="hero">
+    <div class="hero-grid">
+      <section class="hero-main">
+        <div class="eyebrow">🛡️ Online Footprint Investigation</div>
+        <h1>Case File:<br><span>Lily</span></h1>
+        <p class="lead">Your mission is to investigate what a stranger could learn from Lily's online accounts and help identify safer choices.</p>
+        <div class="mission"><strong>🕵️ Your Mission:</strong> Lily has several online accounts. Your job is to investigate what a stranger could learn about her from public information online. Work with your partner to find clues, connect clues from different websites, decide which clues might be risky, and recommend ways Lily can stay safer online.</div>
+        <div class="actions">
+          <a class="nav-btn" href="roblox_camp.html"><span class="icon">🎮</span><span><strong>Roblox Profile</strong><small>Username, activity, friends</small></span></a>
+          <a class="nav-btn" href="youtube_camp.html"><span class="icon">▶️</span><span><strong>YouTube Channel</strong><small>Videos, bio, comments</small></span></a>
+          <a class="nav-btn" href="instagram_camp.html"><span class="icon">📸</span><span><strong>Mom's Instagram</strong><small>Photos, captions, locations</small></span></a>
+          <a class="nav-btn" href="teamsite_camp.html"><span class="icon">⚽</span><span><strong>Soccer Team Site</strong><small>Roster, schedule, location</small></span></a>
+        </div>
+      </section>
+      <aside class="side">
+        <div class="case-card"><div class="case-photo">⚽</div><h2>About Lily</h2><p>Lily is a elementary school student who enjoys soccer, art, gaming, and spending time with friends. She shares parts of her life online, just like many kids her age. Your challenge is to figure out what strangers might be able to learn from her posts.</p></div>
+        <div class="checklist"><h3>Questions to Answer</h3>
+          <div class="q"><span class="q-num">1</span><span>What identity clues can you find?</span></div><div class="q"><span class="q-num">2</span><span>What school or grade-level clues appear?</span></div><div class="q"><span class="q-num">3</span><span>What activity, friend, or team clues appear?</span></div><div class="q"><span class="q-num">4</span><span>What location or routine clues can you connect?</span></div><div class="q"><span class="q-num">5</span><span>Which clue seems harmless alone but riskier when combined?</span></div><div class="q"><span class="q-num">6</span><span>What advice would you give Lily?</span></div>
+        </div>
+        <div class="remember"><strong>💡 Detective Tip:</strong> Real investigators rarely find every answer in one place. The trick is combining small clues from different websites. One clue might seem harmless, but several clues together can reveal much more than you expect.</div>
+      </aside>
+    </div>
+  </main>
+  <div class="footer">Digital Safety Detective Program • Case File #003</div>
+</div>
+</body>
+</html>
